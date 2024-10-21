@@ -22,7 +22,7 @@ let objects = [];
 //game properties
 let score = 0;
 let gameOver = false;
-
+let numLives=3;
 //listen for keyboard events
 
 document.addEventListener('keydown', keyDown);
@@ -101,11 +101,18 @@ function updateObjects() {
       ) {
         // Object caught
         score++;
-        objects.splice(i, 1);
+        objects.splice(i, 1); //remove object from array
         i--;
       } else if (obj.y > canvasHeight) {
         // Object missed
-        gameOver = true;
+        //live system
+        numLives --;
+        objects.splice(i,1);
+        i--;
+        if (numLives===0)
+        {
+          gameOver = true;
+        }
       }
     }
   }
@@ -126,7 +133,7 @@ function updateObjects() {
   function drawScore() {
     ctx.fillStyle = '#fff';
     ctx.font = '20px Arial';
-    ctx.fillText(`Score: ${score}`, 10, 30);
+    ctx.fillText(`Score: ${score}`, 10, 30); //template literal
   }
 
   //update and render game
@@ -157,3 +164,5 @@ function updateObjects() {
 
   //spawn objects every second
   setInterval(createObject, 1000);
+
+  //Custom gameover alert based on score
