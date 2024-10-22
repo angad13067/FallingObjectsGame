@@ -135,7 +135,13 @@ function updateObjects() {
     ctx.font = '20px Arial';
     ctx.fillText(`Score: ${score}`, 10, 30); //template literal
   }
-
+  
+  function drawLives()
+  {
+    ctx.fillStyle = '#fff';
+    ctx.font = '20px Arial';
+    ctx.fillText(`Lives: ${numLives}`, 11, 55);
+  }
   //update and render game
   function clearCanvas() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -155,6 +161,7 @@ function updateObjects() {
     drawPlayer();
     drawObjects();
     drawScore();
+    drawLives();
   
     requestAnimationFrame(gameLoop);
   }
